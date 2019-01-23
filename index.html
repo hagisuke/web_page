@@ -3,6 +3,8 @@
 <div class="container">
 <center><font size="10">卒業論文提出締め切りまで</font><center><br>
 <div id="countOutput" style="color:blue;  font-size:100px; text-align:center;"></div>
+
+<button id="ryuunen_button" onclick="ryuunen()">時間を増やす</button>
 </div>
 
 <style>
@@ -11,14 +13,22 @@
   text-align:center;
   background-color:#f0ffff;
 }
+button#ryuunen_button{
+  width: 300px;
+  height: 70px;
+  margin: 30px;
+  font-size: 24pt;
+  overflow: hidden;
+}
 </style>
 
 <script>
+let graduateYear = 2019;
+let anyDate = new Date(`${graduateYear}/2/1 12:00:00`);
+
 function dateCounter() {
- 
     var timer = setInterval(function() {
     var nowDate = new Date();
-    var anyDate = new Date("2019/2/1 12:00:00");
     var daysBetween = Math.ceil((anyDate - nowDate)/(1000*60*60*24)) - 1;
     var ms = (anyDate - nowDate);
     if (ms >= 0) {
@@ -28,7 +38,7 @@ function dateCounter() {
         var s = Math.round((ms - h * 3600000 - m * 60000) / 1000);
         var element = document.getElementById("countOutput") ;
         element.textContent = "残り" +daysBetween + "日と" +_h + "時間" + m + "分" +s + "秒";
- 
+
         if ((h == 0) && (m == 0) && (s == 0)) {
         alert("時間です！");
         clearInterval(timer);
@@ -36,6 +46,10 @@ function dateCounter() {
     }else{
     }
     }, 1000);
+}
+
+const ryuunen = () => {
+  anyDate = new Date(`${++graduateYear}/2/1 12:00:00`);
 }
 dateCounter();
 </script>
