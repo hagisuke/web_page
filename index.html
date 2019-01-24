@@ -1,10 +1,33 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<head>
+<title>機械卒論タイマー</title>
+<script src="./sotsuron_timer.js"></script>
+</head>
+
+<body>
 <div class="container">
-<center><font size="10">卒業論文提出締め切りまで</font><center><br>
+<font size="10">卒業論文提出締め切りまで</font><br>
 <div id="countOutput" style="color:blue;  font-size:100px; text-align:center;"></div>
 
 <button id="ryuunen_button" onclick="ryuunen()">時間を増やす</button>
+
+<div id="twitter_container">
+    <a class="twitter-share-button"
+    id="tweet_button"
+    href="https://twitter.com/intent/tweet"
+    data-hashtags="機械卒論タイマー"
+    data-size="large">
+    Tweet</a>
+</div>
+<script>
+window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="http://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+}(document, "script", "twitter-wjs"));
+</script>
 </div>
 
 <style>
@@ -21,35 +44,4 @@ button#ryuunen_button{
   overflow: hidden;
 }
 </style>
-
-<script>
-let graduateYear = 2019;
-let anyDate = new Date(`${graduateYear}/2/1 12:00:00`);
-
-function dateCounter() {
-    var timer = setInterval(function() {
-    var nowDate = new Date();
-    var daysBetween = Math.ceil((anyDate - nowDate)/(1000*60*60*24)) - 1;
-    var ms = (anyDate - nowDate);
-    if (ms >= 0) {
-        var h = Math.floor(ms / 3600000);
-        var _h = h % 24;
-        var m = Math.floor((ms - h * 3600000) / 60000);
-        var s = Math.round((ms - h * 3600000 - m * 60000) / 1000);
-        var element = document.getElementById("countOutput") ;
-        element.textContent = "残り" +daysBetween + "日と" +_h + "時間" + m + "分" +s + "秒";
-
-        if ((h == 0) && (m == 0) && (s == 0)) {
-        alert("時間です！");
-        clearInterval(timer);
-        }
-    }else{
-    }
-    }, 1000);
-}
-
-const ryuunen = () => {
-  anyDate = new Date(`${++graduateYear}/2/1 12:00:00`);
-}
-dateCounter();
-</script>
+</body>
