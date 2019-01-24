@@ -16,6 +16,7 @@ function dateCounter() {
     var nowDate = new Date();
     var daysBetween = Math.ceil((anyDate - nowDate)/(1000*60*60*24)) - 1;
     var ms = (anyDate - nowDate);
+    var element = document.getElementById("countOutput");
     forceRefresh = forceRefresh || tweetText === "";
 
     if (ms >= 0) {
@@ -23,21 +24,18 @@ function dateCounter() {
         var _h = h % 24;
         var m = Math.floor((ms - h * 3600000) / 60000);
         var s = Math.round((ms - h * 3600000 - m * 60000) / 1000);
-        var element = document.getElementById("countOutput") ;
         element.textContent = "残り" +daysBetween + "日と" +_h + "時間" + m + "分" +s + "秒";
 
         tweetText = `卒業論文提出締め切りまで残り${daysBetween}日${_h}時間${m}分`;
         if(graduateYear - initialGraduateYear > 0)
             tweetText += `（${graduateYear - initialGraduateYear}回時間を増やしました！）`;
-
-        if ((h == 0) && (m == 0) && (s == 0)) {
+    }else{
         alert("時間です！");
         clearInterval(timer);
-        }
-    }else{
+        element.textContent = "残り0日と0時間0分0秒";
         tweetText = "卒業論文提出締め切りを過ぎました";
     }
-    if(forceRefresh || ms % 60000 <= 1000) refreshTweetText(tweetText); // every 1 minute
+    if(forceRefresh || Math.abs(ms % 60000) <= 1000) refreshTweetText(tweetText); // every 1 minute
     forceRefresh = false;
     }, 1000);
 }
