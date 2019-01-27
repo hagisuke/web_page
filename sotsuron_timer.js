@@ -11,6 +11,18 @@ const refreshTweetText = text => {
     twttr.widgets.load();
 };
 
+const ryuunen = () => {
+    anyDate = new Date(`${++graduateYear}/2/1 12:00:00`);
+    forceRefresh = true;
+}
+
+const toggleDarkMode = dark => {
+    if(dark) document.getElementById('container').classList.add('dark');
+    else document.getElementById('container').classList.remove('dark');
+}
+
+const isDayTime = (h, morning) => (morning <= h && h < morning + 12);
+
 function dateCounter() {
     var timer = setInterval(function() {
     var nowDate = new Date();
@@ -18,6 +30,10 @@ function dateCounter() {
     var ms = (anyDate - nowDate);
     var element = document.getElementById("countOutput");
     forceRefresh = forceRefresh || tweetText === "";
+    // check dark mode
+    const dayTime = isDayTime(nowDate.getHours(), 6);
+    toggleDarkMode(!dayTime);
+    document.getElementById('toggle_dark_mode').checked = !dayTime;
 
     if (ms >= 0) {
         var h = Math.floor(ms / 3600000);
@@ -40,23 +56,9 @@ function dateCounter() {
     }, 1000);
 }
 
-const ryuunen = () => {
-    anyDate = new Date(`${++graduateYear}/2/1 12:00:00`);
-    forceRefresh = true;
-}
-
-const togleDarkMode = checked => {
-    if(checked) document.getElementById('container').classList.add('dark');
-    else document.getElementById('container').classList.remove('dark');
-}
-
-const isDayTime = (h, morning) => (morning <= h && h < morning + 12)
-
 window.onload = () => {
     const dayTime = isDayTime(new Date().getHours(), 6);
-    if(dayTime) document.getElementById('container').classList.remove('dark');
-    else document.getElementById('container').classList.add('dark');
-
+    toggleDarkMode(!dayTime);
     document.getElementById('toggle_dark_mode').checked = !dayTime;
 }
 
