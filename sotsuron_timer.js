@@ -44,4 +44,20 @@ const ryuunen = () => {
     anyDate = new Date(`${++graduateYear}/2/1 12:00:00`);
     forceRefresh = true;
 }
+
+const togleDarkMode = checked => {
+    if(checked) document.getElementById('container').classList.add('dark');
+    else document.getElementById('container').classList.remove('dark');
+}
+
+const isDayTime = (h, morning) => (morning <= h && h < morning + 12)
+
+window.onload = () => {
+    const dayTime = isDayTime(new Date().getHours(), 6);
+    if(dayTime) document.getElementById('container').classList.remove('dark');
+    else document.getElementById('container').classList.add('dark');
+
+    document.getElementById('toggle_dark_mode').checked = !dayTime;
+}
+
 dateCounter();
