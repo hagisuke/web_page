@@ -1,4 +1,4 @@
-const initialGraduateYear = 2019;
+const initialGraduateYear = 2020;
 let graduateYear = initialGraduateYear;
 let anyDate = new Date(`${graduateYear}/2/1 12:00:00`);
 let tweetText = "";
