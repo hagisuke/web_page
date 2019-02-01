@@ -3,6 +3,7 @@ let graduateYear = initialGraduateYear;
 let anyDate = new Date(`${graduateYear}/2/1 12:00:00`);
 let tweetText = "";
 let forceRefresh = false;
+let manualDarkMode = null;
 
 const refreshTweetText = text => {
     const twitterContainer = document.getElementById("twitter_container");
@@ -11,6 +12,20 @@ const refreshTweetText = text => {
     twttr.widgets.load();
 };
 
+const ryuunen = () => {
+    anyDate = new Date(`${++graduateYear}/2/1 12:00:00`);
+    forceRefresh = true;
+}
+
+const toggleDarkMode = (dark, manual) => {
+    if(dark) document.getElementById('container').classList.add('dark');
+    else document.getElementById('container').classList.remove('dark');
+    if(manual) manualDarkMode = dark;
+    else document.getElementById('toggle_dark_mode').checked = dark;
+}
+
+const isDayTime = (h, morning) => (morning <= h && h < morning + 12);
+
 function dateCounter() {
     var timer = setInterval(function() {
     var nowDate = new Date();
@@ -18,6 +33,10 @@ function dateCounter() {
     var ms = (anyDate - nowDate);
     var element = document.getElementById("countOutput");
     forceRefresh = forceRefresh || tweetText === "";
+    // check dark mode
+    const dayTime = isDayTime(nowDate.getHours(), 6);
+    console.log(manualDarkMode);
+    toggleDarkMode(manualDarkMode !== null ? manualDarkMode : !dayTime, false);
 
     if (ms >= 0) {
         var h = Math.floor(ms / 3600000);
@@ -40,8 +59,8 @@ function dateCounter() {
     }, 1000);
 }
 
-const ryuunen = () => {
-    anyDate = new Date(`${++graduateYear}/2/1 12:00:00`);
-    forceRefresh = true;
+window.onload = () => {
+    toggleDarkMode(!isDayTime(new Date().getHours(), 6), false);
 }
+
 dateCounter();

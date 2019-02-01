@@ -4,13 +4,17 @@
 <script src="./sotsuron_timer.js"></script>
 <meta name="twitter:title" content="機械卒論タイマー"/>
 <meta name="twitter:card"  content="summary"/>
-<meta name="twitter:image" content="https://yasu31.github.io/web_page/image.png"/>
+<meta name="twitter:image" content="https://hagisuke.github.io/web_page/image.png"/>
 </head>
 
 <body>
-<div class="container">
-<font size="10">卒業論文提出締め切りまで</font><br>
-<div id="countOutput" style="color:blue;  font-size:100px; text-align:center;"></div>
+<div id="container">
+<header>
+  <input type="checkbox" id="toggle_dark_mode" onchange="toggleDarkMode(this.checked, true)">
+  <label for="toggle_dark_mode">Dark Mode</label>
+</header>
+<div style="font-size: 48px;line-height: 100px">卒業論文提出締め切りまで</div>
+<div id="countOutput">残り-日と-時間--分--秒</div>
 
 <button id="ryuunen_button" onclick="ryuunen()">時間を増やす</button>
 
@@ -33,17 +37,94 @@ window.twttr = (function (d,s,id) {
 </div>
 
 <style>
-.container{
-  line-height:200px;
-  text-align:center;
-  background-color:#f0ffff;
-}
-button#ryuunen_button{
-  width: 300px;
-  height: 70px;
-  margin: 30px;
-  font-size: 24pt;
-  overflow: hidden;
-}
+  body {
+    font-family: 'Arial',YuGothic,'Yu Gothic','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,'ＭＳ ゴシック',sans-serif;
+  }
+  .dark{
+    color: whitesmoke;
+  }
+  #container{
+    width: 100vw;
+    height: 100vh;
+    text-align:center;
+    background-color:#f0ffff;
+  }
+  .dark#container{
+    background-color:#323535;
+  }
+  header{
+    text-align: right;
+  }
+  input[type=checkbox] {
+    display: none;
+    cursor: pointer;
+  }
+  label{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 24px;
+  }
+  label:after {
+    content: '';
+    position: absolute;
+    left: -32px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 25px;
+    height: 25px;
+    border: 2px solid black;
+    border-radius: 6px;
+  }
+  .dark label:after{
+    border: 2px solid #bbb;
+  }
+  label:before {
+    content: '';
+    -webkit-transition: opacity 0.2s linear;
+    transition: opacity 0.2s linear;
+    position: absolute;
+    top: 50%;
+    left: -23px;
+    display: block;
+    margin-top: -9px;
+    width: 7px;
+    height: 12px;
+    border-right: 3px solid black;
+    border-bottom: 3px solid black;
+    opacity: 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  .dark label:before{
+    border-right: 3px solid white;
+    border-bottom: 3px solid white;
+  }
+  input[type=checkbox]:checked + label:before {
+    opacity: 1;
+  }
+  div#countOutput{
+    color:blue;
+    font-size:100px;
+    line-height:200px;
+    text-align:center;
+  }
+  .dark div#countOutput{
+    color: red;
+  }
+  button#ryuunen_button{
+    width: 300px;
+    height: 70px;
+    margin: 30px;
+    font-size: 24pt;
+    overflow: hidden;
+  }
+  .dark button#ryuunen_button{
+    background-color:black;
+    color: whitesmoke;
+  }
 </style>
 </body>
