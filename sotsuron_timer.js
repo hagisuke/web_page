@@ -1,19 +1,19 @@
 const initialGraduateYear = 2020;
 let graduateYear = initialGraduateYear;
-let anyDate = new Date(`${graduateYear}/2/1 12:00:00`);
+let anyDate = new Date(`${graduateYear}/7/12 09:00:00`);
 let tweetText = "";
 let forceRefresh = false;
 let manualDarkMode = null;
 
 const refreshTweetText = text => {
     const twitterContainer = document.getElementById("twitter_container");
-    twitterContainer.innerHTML = '<a class="twitter-share-button" id="tweet_button" href="https://twitter.com/intent/tweet" data-hashtags="機械卒論タイマー" data-size="large">';
+    twitterContainer.innerHTML = '<a class="twitter-share-button" id="tweet_button" href="https://twitter.com/intent/tweet" data-hashtags="機械卒論タイマー, 機械卒論中間試問タイマー" data-size="large">';
     twitterContainer.getElementsByTagName("a")[0].setAttribute("data-text", text);
     twttr.widgets.load();
 };
 
 const ryuunen = () => {
-    anyDate = new Date(`${++graduateYear}/2/1 12:00:00`);
+    anyDate = new Date(`${++graduateYear}/7/12 09:00:00`);
     forceRefresh = true;
 }
 
