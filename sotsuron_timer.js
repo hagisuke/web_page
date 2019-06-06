@@ -45,7 +45,7 @@ function dateCounter() {
         var s = Math.round((ms - h * 3600000 - m * 60000) / 1000);
         element.textContent = "残り" +daysBetween + "日と" +_h + "時間" + m + "分" +s + "秒（多分）";
 
-        tweetText = `卒業論文提出締め切りまで残り${daysBetween}日${_h}時間${m}分（多分）`;
+        tweetText = `卒業論文中間試問まで残り${daysBetween}日${_h}時間${m}分（多分）`;
         if(graduateYear - initialGraduateYear > 0)
             tweetText += `（${graduateYear - initialGraduateYear}回時間を増やしました！）`;
     }else{
