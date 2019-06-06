@@ -7,7 +7,7 @@ let manualDarkMode = null;
 
 const refreshTweetText = text => {
     const twitterContainer = document.getElementById("twitter_container");
-    twitterContainer.innerHTML = '<a class="twitter-share-button" id="tweet_button" href="https://twitter.com/intent/tweet" data-hashtags="機械卒論タイマー, 機械卒論中間試問タイマー" data-size="large">';
+    twitterContainer.innerHTML = '<a class="twitter-share-button" id="tweet_button" href="https://twitter.com/intent/tweet" data-hashtags="機械卒論タイマー,機械卒論中間試問タイマー" data-size="large">';
     twitterContainer.getElementsByTagName("a")[0].setAttribute("data-text", text);
     twttr.widgets.load();
 };
