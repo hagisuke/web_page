@@ -1,10 +1,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
-<title>機械卒論タイマー</title>
-<script src="./sotsuron_timer.js"></script>
-<meta name="twitter:title" content="機械卒論タイマー"/>
-<meta name="twitter:card"  content="summary"/>
-<meta name="twitter:image" content="https://hagisuke.github.io/web_page/image.png"/>
+  <title>機械系卒論タイマー</title>
+  <link href='./Flapper/css/flapper.css' type="text/css" rel="stylesheet"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src="./Flapper/jshashtable-2.1/jshashtable.js"></script>
+  <!-- <script src="./Flapper/numberformatter/jquery.numberformatter-1.2.3.min.js"></script> -->
+  <!-- <script src="./Flapper/transform/dist/jquery.transform-0.9.3.min.js"></script> -->
+  <script src="./Flapper/src/jquery.flapper.js"></script>
+  <script src="./sotsuron_timer.js?<?= filemtime('./sotsuron_timer.js'); ?>"></script><!-- https://qiita.com/laineus/items/ae9c9117cbcbd5333035 -->
+  <meta name="twitter:title" content="機械卒論タイマー"/>
+  <meta name="twitter:card"  content="summary"/>
+  <meta name="twitter:image" content="https://yasu31.github.io/web_page/image.png"/>
 </head>
 
 <body>
@@ -13,8 +19,16 @@
   <input type="checkbox" id="toggle_dark_mode" onchange="toggleDarkMode(this.checked, true)">
   <label for="toggle_dark_mode">Dark Mode</label>
 </header>
-<div style="font-size: 48px;line-height: 100px">卒業論文提出締め切りまで</div>
-<div id="countOutput">残り-日と-時間--分--秒</div>
+<h2>東大工学部機械系</h2>
+<div style="font-size: 48px;line-height: 100px">卒業論文提出まで</div>
+<div id="countOutput">
+  <div class="display"><input id="days" class="flapper L dark"/></div>日
+  <div class="display"><input id="hours" class="flapper L dark"/></div>時間
+  <div class="display"><input id="minutes" class="flapper L dark"/></div>分
+  <div class="display"><input id="seconds" class="flapper L dark"/></div>秒
+</div><br>
+<h3>2020.2/1正午 〆切と仮定</h3>
+<br>
 
 <button id="ryuunen_button" onclick="ryuunen()">時間を増やす</button>
 
@@ -38,7 +52,8 @@ window.twttr = (function (d,s,id) {
 
 <style>
   body {
-    font-family: 'Arial',YuGothic,'Yu Gothic','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,'ＭＳ ゴシック',sans-serif;
+      font-family: 'Arial',YuGothic,'Yu Gothic','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,'ＭＳ ゴシック',sans-serif;
+      margin: 0px;
   }
   .dark{
     color: whitesmoke;
@@ -48,9 +63,15 @@ window.twttr = (function (d,s,id) {
     height: 100vh;
     text-align:center;
     background-color:#f0ffff;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-image:url('./img/day.jpg')
   }
   .dark#container{
-    background-color:#323535;
+      background-color:#323535;
+      background-image:url('./img/night.jpg');
   }
   header{
     text-align: right;
@@ -107,13 +128,10 @@ window.twttr = (function (d,s,id) {
     opacity: 1;
   }
   div#countOutput{
-    color:blue;
-    font-size:100px;
-    line-height:200px;
+    font-size:30px;
     text-align:center;
   }
   .dark div#countOutput{
-    color: red;
   }
   button#ryuunen_button{
     width: 300px;
@@ -125,6 +143,9 @@ window.twttr = (function (d,s,id) {
   .dark button#ryuunen_button{
     background-color:black;
     color: whitesmoke;
+  }
+  .display{
+      display:inline-block;
   }
 </style>
 </body>

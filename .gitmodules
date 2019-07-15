@@ -1,0 +1,3 @@
+[submodule "Flapper"]
+	path = Flapper
+	url = https://github.com/jayKayEss/Flapper.git
